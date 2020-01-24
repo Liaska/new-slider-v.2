@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<script src="https://kit.fontawesome.com/c4c7432e0d.js" crossorigin="anonymous"></script>
+<style type="text/css" media="screen"> 
+.container-text{ 
+max-width: 1500px; 
+width: 100%; 
+margin: 0 auto; 
+text-align: center; 
+} 
+
+a { 
+text-decoration: none; 
+color: white;
+} 
+
+.press { 
+font-size: 32px; 
+text-transform: uppercase; 
+font-weight: 800; 
+letter-spacing: 1px; 
+    color: #444343; 
+} 
+
+.notaslider{ 
+display: inline-block; 
+width: 100%; 
+overflow: hidden; 
+height: 325px; 
+position: relative; 
+} 
+
+.btn-down { 
+position: absolute; 
+padding: 150px 20px 150px 10px;
+left: 0px;
+top: 50%; 
+transform: translateY(-50%); 
+z-index: 2; 
+color: white;
+font-size: 30px;
+transition: font-size 1s ease;
+} 
+
+.btn-up { 
+position: absolute; 
+right: 0px; 
+top: 50%; 
+padding: 150px 20px 150px 10px;
+transform: translateY(-50%); 
+z-index: 2; 
+color: white;
+font-size: 30px;
+transition: font-size 1s ease;
+} 
+
+.btn-up:hover, .btn-down:hover {
+   font-size: 40px;
+   background-color: rgba(0,0,0,0.3);
+}
+
+.slider-item { 
+position: relative; 
+display:inline-block; 
+width: 1500px; 
+width: 100%; 
+height: 325px; 
+font-size: 45px; 
+font-weight: 600; 
+} 
+
+
+.slider-item p { 
+position: absolute; 
+width: 100%; 
+left: 50%; 
+bottom: 0px; 
+transform: translateX(-50%); 
+transition: display ease 1s; 
+color: white;
+color: #ffffff; 
+text-shadow: #000000 2px 2px 10px; 
+transition: all ease 1s; 
+} 
+
+.slider-item p:hover,.slider-item p:active {
+    font-size: 50px;
+    color: white;
+}
+
+.hidden { 
+display: none; 
+} 
+.omega { 
+border: 2px solid black; 
+padding: 10px; 
+} 
+
+.item-1 { 
+z-index: 1; 
+background: url("https://ic.pics.livejournal.com/your_lifestyle/74690146/103278/103278_900.jpg") no-repeat 50% 0% /cover; 
+} 
+
+.item-2 { 
+background: url("https://stopswithme.com/wp-content/uploads/2017/06/social__0013_Hookah2.png") no-repeat 50% 50% /cover; 
+} 
+
+.item-3 { 
+background: url("http://cafe-dirizhable.ru/media/k2/items/cache/f41bf091a4e18f2312495cc0e975d9f7_L.jpg") no-repeat 50% 35% /cover; 
+} 
+
+.item-4 { 
+background: url("http://gallery-noginsk.ru/images/kalyan.jpg") no-repeat 50% 15% /cover; 
+} 
+
+</style> 
+<title>Абсолютная ссылка</title> 
+</head> 
+<div class="container-text"> 
+<p class="press">Свежая пресса:</p> 
+     <div class="notaslider"> 
+     <div class="btn-up fas fa-chevron-right"></div> 
+     <div class="btn-down fas fa-chevron-left"></div> 
+     <div class="slider-item item-1 "><p class="mega-text"><a href="https://cloudtrade.ru/blog/news2-b8">Еженедельные новости кальянной индустрии #2</a></p></div> 
+     <div class="slider-item item-2 "><p class="mega-text"><a href="https://cloudtrade.ru/blog/news-hookah-b7">Еженедельные новости кальянной индустрии #1</a></p></div>
+     <div class="slider-item item-3 "><p class="mega-text"><a href="https://cloudtrade.ru/blog/news-hookah-b5">Премиальный табак TRINITY от создателей PUER'a!</a></p></div> 
+     <div class="slider-item item-4 "><p class="mega-text"><a href="https://cloudtrade.ru/blog/news-hookah-b6">DOGMA - 47% сигарного листа.</a></p></div> 
+</div> 
+</div> 
+<script>
+let sliderItem = document.querySelectorAll(".slider-item"); 
+let actualCount = 0; 
+let linker = ["https://cloudtrade.ru/blog/news2-b8","https://cloudtrade.ru/blog/news-hookah-b7",
+"https://cloudtrade.ru/blog/news-hookah-b5","https://cloudtrade.ru/blog/news-hookah-b6"];
+
+function slider() { 
+for (let i = 0; i < sliderItem.length; i ++) { 
+sliderItem[i].classList.add("hidden"); 
+} 
+sliderItem[actualCount].classList.remove("hidden"); 
+} 
+
+slider (); 
+
+var LyaskaKonstantin = function () {
+          _timerId = setInterval(function () {
+            if (actualCount + 1 == sliderItem.length) { 
+        actualCount = 0; 
+          } else { 
+            actualCount++; 
+            }    
+            slider ();
+            },5000);
+        };
+
+        // функция, отключающая автоматическую смену слайдов
+        var _stopAutoplay = function () {
+          clearInterval(_timerId);
+        };
+
+document.querySelector(".btn-down").onclick = function () { 
+if (actualCount-1 == -1) { 
+actualCount = sliderItem.length - 1; 
+} else { 
+actualCount--; 
+} 
+slider(); 
+_stopAutoplay();
+
+} 
+
+document.querySelector(".btn-up").onclick = function () { 
+    
+if (actualCount + 1 == sliderItem.length) { 
+actualCount = 0; 
+} else { 
+actualCount++; 
+} 
+slider(); 
+_stopAutoplay();
+
+}
+
+document.querySelector(".notaslider").addEventListener("mouseenter", function () {
+   _stopAutoplay();
+})
+
+document.querySelector(".notaslider").addEventListener("mouseleave", function () {
+   LyaskaKonstantin();
+})
+
+
+
+sliderItem.forEach((el,i)=> el.onclick=e=> location = linker[i]);
+
+LyaskaKonstantin();
+
+
+</script> 
+</body> 
+</html>
